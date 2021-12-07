@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const usersRouter = require("./routes/users");
+const bodyParser = require("body-parser");
 
 const users = [
   {
@@ -8,6 +10,12 @@ const users = [
     description: "ncjncjncjncncnionconeioncvoeinv ncvioenvi venvienvienfvi",
   },
 ];
+
+//Parser
+app.use(bodyParser.json());
+
+//Middleware
+app.use("/api/v1/users", usersRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello");
