@@ -96,7 +96,7 @@ const createPostRequest = (nameValue, descriptionValue) => {
     .then((json) => console.log(json));
 };
 
-fetch("http://localhost:5000/api/v1/users")
+fetch("https://add-user-node.herokuapp.com/api/v1/users")
   .then((res) => res.json())
   //mapping through fetched array in a function
   .then((data) => showFetchedPeople(data));
