@@ -48,6 +48,18 @@ form label, form input, form textarea {
   font-size: 25px;
 }
 
+@media (max-width: 800px) {
+  form label, form input, form textarea {
+    width: 70%;
+  }
+}
+
+@media (max-width: 450px) {
+  form label, form input, form textarea {
+    width: 90%;
+  }
+}
+
 form label {
   margin-bottom: 15px;
 }
@@ -74,6 +86,23 @@ form button {
   -ms-grid-columns: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
   gap: 35px;
+}
+
+@media (max-width: 768px) {
+  .result {
+    -ms-grid-columns: 90%;
+        grid-template-columns: 90%;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .result {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
 }
 
 .result .person {
@@ -123,6 +152,14 @@ form button {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   background: white;
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .modal-message h1 {
@@ -130,11 +167,18 @@ form button {
   text-align: center;
   padding: 7px 10px;
   margin-bottom: 25px;
+  width: 100%;
 }
 
 .modal-message p {
   text-align: center;
   font-size: 22px;
+  width: 90%;
+  margin-bottom: 25px;
+}
+
+.modal-message i {
+  font-size: 25px;
 }
 
 .modal-message button {
@@ -142,5 +186,11 @@ form button {
   margin: 25px auto;
   padding: 8px 20px;
   border-radius: 5px;
+}
+
+.toggle-modal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 /*# sourceMappingURL=style.css.map */

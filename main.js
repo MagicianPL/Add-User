@@ -2,10 +2,30 @@ const nameInput = document.querySelector("#name");
 const description = document.querySelector("#description");
 const btn = document.querySelector("button");
 const personsWrapper = document.querySelector(".result");
+const modal = document.querySelector(".modal-message");
+const modalBtn = document.querySelector(".modal-btn");
 
-fetch("http://localhost:5000/api/v1/users")
-  .then((res) => res.json())
-  .then((data) => console.log(data));
+const toggleModal = () => {
+  modal.classList.toggle("toggle-modal");
+};
+
+const validateInputs = () => {
+  if (
+    nameInput.value.trim().length === 0 &&
+    description.value.trim().length === 0
+  ) {
+    console.log("falsy name and description");
+    return false;
+  } else if (nameInput.value.trim().length === 0) {
+    console.log("falsy name");
+    return false;
+  } else if (description.value.trim().length === 0) {
+    console.log("Falsy description");
+    return false;
+  } else {
+    return true;
+  }
+};
 
 const createUser = (name, description) => {
   const personDiv = document.createElement("div");
@@ -27,9 +47,48 @@ const createUser = (name, description) => {
 
 const handleFormSubmit = (e) => {
   e.preventDefault();
-  createUser(nameInput.value, description.value);
-  nameInput.value = "";
-  description.value = "";
+  if (validateInputs()) {
+    createPostRequest(nameInput.value, description.value);
+    createUser(nameInput.value, description.value);
+    nameInput.value = "";
+    description.value = "";
+    toggleModal();
+  } else {
+    return;
+  }
 };
 
+const showFetchedPeople = (array) => {
+  array.map((obj) => {
+    const { name, description } = obj;
+    createUser(name, description);
+  });
+};
+
+const createPostRequest = (nameValue, descriptionValue) => {
+  // POST request using fetch()
+  fetch("http://localhost:5000/api/v1/users", {
+    // Adding method type
+    method: "POST",
+    // Adding body or contents to send
+    body: JSON.stringify({
+      name: nameValue,
+      description: descriptionValue,
+    }),
+    // Adding headers to the request
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    // Converting to JSON
+    .then((response) => response.json())
+    // Displaying results to console
+    .then((json) => console.log(json));
+};
+
+fetch("http://localhost:5000/api/v1/users")
+  .then((res) => res.json())
+  .then((data) => showFetchedPeople(data));
+
 btn.addEventListener("click", handleFormSubmit);
+modalBtn.addEventListener("click", toggleModal);

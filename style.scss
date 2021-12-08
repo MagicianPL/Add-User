@@ -36,6 +36,14 @@ form {
     label, input, textarea {
         width: 50%;
         font-size: 25px;
+
+        @media (max-width: 800px) {
+            width: 70%;
+        }
+
+        @media (max-width: 450px) {
+            width: 90%;
+        }
     }
 
     label {
@@ -63,6 +71,15 @@ form {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 35px;
+
+    @media (max-width: 768px) {
+        grid-template-columns: max(90%);
+        justify-content: center;
+    }
+
+    @media (max-width: 500px) {
+        grid-template-columns: 1fr;
+    }
 
     .person {
         border: 1px solid gray;
@@ -104,17 +121,28 @@ form {
     left: 50%;
     transform: translateX(-50%);
     background: white;
+    display: none;
+    flex-direction: column;
+    align-items: center;
 
     h1 {
         background: gray;
         text-align: center;
         padding: 7px 10px;
         margin-bottom: 25px;
+        width: 100%;
     }
 
     p {
         text-align: center;
         font-size: 22px;
+        width: 90%;
+        margin-bottom: 25px;
+    }
+
+    i {
+        font-size: 25px;
+        
     }
 
     button {
@@ -123,4 +151,8 @@ form {
         padding: 8px 20px;
         border-radius: 5px;
     }
+}
+
+.toggle-modal {
+    display: flex;
 }
