@@ -11,6 +11,20 @@
     padding: 1.5rem;
 }
 
+button {
+    border: 1px solid gray;
+    background: rgb(61, 58, 58);
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    transition: all 0.4s;
+
+    &:hover {
+        background: rgb(196, 185, 185);
+        color: black;
+    }
+}
+
 form {
     width: 100%;
     max-width: 800px;
@@ -77,5 +91,36 @@ form {
             font-size: 35px;
             margin-bottom: 15px;
         }
+    }
+}
+
+.modal-message {
+    width: 90%;
+    max-width: 800px;
+    padding: 20px 0;
+    position: fixed;
+    border: 3px solid gray;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+
+    h1 {
+        background: gray;
+        text-align: center;
+        padding: 7px 10px;
+        margin-bottom: 25px;
+    }
+
+    p {
+        text-align: center;
+        font-size: 22px;
+    }
+
+    button {
+        display: block;
+        margin: 25px auto;
+        padding: 8px 20px;
+        border-radius: 5px;
     }
 }

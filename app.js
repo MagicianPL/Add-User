@@ -4,6 +4,7 @@ const usersRouter = require("./routes/users");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 require("dotenv/config");
+const cors = require("cors");
 
 //Connection to DB
 mongoose
@@ -15,6 +16,8 @@ mongoose
     });
   })
   .catch((err) => console.log(err));
+
+app.use(cors());
 
 //Parser
 app.use(bodyParser.json());
