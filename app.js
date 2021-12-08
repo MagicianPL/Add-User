@@ -2,6 +2,19 @@ const express = require("express");
 const app = express();
 const usersRouter = require("./routes/users");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+require("dotenv/config");
+const Users = require("./models/users");
+
+mongoose
+  .connect(process.env.DB_CONNECTION)
+  .then(() => {
+    console.log("Connected to the database");
+    app.listen(5000, () => {
+      console.log("Server is listening on port 5000");
+    });
+  })
+  .catch((err) => console.log(err));
 
 const users = [
   {
@@ -23,10 +36,6 @@ app.get("/", (req, res) => {
 
 app.get("/api/v1/users", (req, res) => {
   res.json(users);
-});
-
-app.listen(5000, () => {
-  console.log("Server is listening on port 5000");
 });
 
 //GET ("/api/v1/users")

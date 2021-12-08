@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const Users = require("../models/users");
 
 const users = [
   {
@@ -11,13 +12,23 @@ const users = [
 
 router
   .route("/")
-  .get((req, res) => {
+  .get(async (req, res) => {
+    const users = await Users.find();
     res.json(users);
-  })
-  .post((req, res) => {
-    users.push(req.body);
-    res.send(req.body);
     console.log(users);
+  })
+  .post(async (req, res) => {
+    const user = new Users({
+      name: req.body.name,
+      description: req.body.description,
+    });
+    try {
+      const resp = await user.save();
+      res.json(resp);
+    } catch (err) {
+      console.log(err);
+      res.json(err);
+    }
   });
 
 router
