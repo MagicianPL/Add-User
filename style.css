@@ -68,6 +68,7 @@ form input, form textarea {
   margin-bottom: 10px;
   border-radius: 5px;
   border: 2px solid #b6b6b6;
+  padding: 4px 10px;
 }
 
 form .error-name, form .error-desc {
@@ -125,6 +126,11 @@ form button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  opacity: 0;
+  -webkit-transform: translateY(-50px);
+          transform: translateY(-50px);
+  -webkit-animation: appearing-from-top 1s forwards;
+          animation: appearing-from-top 1s forwards;
 }
 
 .result .person p {
@@ -155,8 +161,8 @@ form button {
   border: 3px solid gray;
   top: 30px;
   left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  -webkit-transform: translate(-50%, -30px);
+          transform: translate(-50%, -30px);
   background: white;
   display: none;
   -webkit-box-orient: vertical;
@@ -166,6 +172,25 @@ form button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  opacity: 0;
+  -webkit-animation: appearing-modal-from-top 0.6s forwards;
+          animation: appearing-modal-from-top 0.6s forwards;
+}
+
+@-webkit-keyframes appearing-modal-from-top {
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(-50%, 0px);
+            transform: translate(-50%, 0px);
+  }
+}
+
+@keyframes appearing-modal-from-top {
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(-50%, 0px);
+            transform: translate(-50%, 0px);
+  }
 }
 
 .modal-message h1 {
@@ -198,5 +223,21 @@ form button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+@-webkit-keyframes appearing-from-top {
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes appearing-from-top {
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
 }
 /*# sourceMappingURL=style.css.map */
