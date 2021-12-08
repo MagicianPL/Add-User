@@ -2,20 +2,17 @@ const express = require("express");
 const router = express.Router();
 const Users = require("../models/users");
 
-const users = [
-  {
-    id: 1,
-    name: "Some name",
-    description: "ncjncjncjncncnionconeioncvoeinv ncvioenvi venvienvienfvi",
-  },
-];
-
 router
   .route("/")
   .get(async (req, res) => {
-    const users = await Users.find();
-    res.json(users);
-    console.log(users);
+    try {
+      const users = await Users.find();
+      res.json(users);
+      console.log(users);
+    } catch (err) {
+      console.log(err);
+      res.json(err);
+    }
   })
   .post(async (req, res) => {
     const user = new Users({
@@ -33,27 +30,26 @@ router
 
 router
   .route("/:id")
-  .get((req, res) => {
-    const user = users.find((user) => user.id === parseInt(req.params.id));
-    if (user) {
-      return res.json(user);
+  .get(async (req, res) => {
+    try {
+      const user = await Users.findById(req.params.id);
+      console.log(user);
+      res.json(user);
+    } catch (err) {
+      console.log(err);
+      res.json(err);
     }
-    res.status(404).json({ msg: `Cannot find user by id ${req.params.id}` });
   })
-  .patch((req, res) => {
-    const user = req.body;
-    const index = users.findIndex(
-      (user) => user.id === parseInt(req.params.id)
-    );
-    users[index] = user;
-    res.send(user);
+  .patch(async (req, res) => {
+    updatedUser = await Users.findById(req.params.id);
+    Object.assign(updatedUser, req.body);
+    updatedUser.save();
+    res.send(updatedUser);
   })
-  .delete((req, res) => {
-    const index = users.findIndex(
-      (user) => user.id === parseInt(req.params.id)
-    );
-    const deleted = users.splice(index, 1);
-    res.json(deleted);
+  .delete(async (req, res) => {
+    const deletedUser = await Users.remove({ _id: req.params.id });
+    console.log(deletedUser);
+    res.json(deletedUser);
   });
 
 module.exports = router;

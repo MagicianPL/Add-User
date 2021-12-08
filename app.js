@@ -4,8 +4,8 @@ const usersRouter = require("./routes/users");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 require("dotenv/config");
-const Users = require("./models/users");
 
+//Connection to DB
 mongoose
   .connect(process.env.DB_CONNECTION)
   .then(() => {
@@ -16,18 +16,10 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-const users = [
-  {
-    id: 1,
-    name: "Some name",
-    description: "ncjncjncjncncnionconeioncvoeinv ncvioenvi venvienvienfvi",
-  },
-];
-
 //Parser
 app.use(bodyParser.json());
 
-//Middleware
+//Middleware - Routes
 app.use("/api/v1/users", usersRouter);
 
 app.get("/", (req, res) => {
