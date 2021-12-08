@@ -65,9 +65,15 @@ form label {
 }
 
 form input, form textarea {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border-radius: 5px;
   border: 2px solid #b6b6b6;
+}
+
+form .error-name, form .error-desc {
+  color: red;
+  margin-bottom: 25px;
+  visibility: hidden;
 }
 
 form button {

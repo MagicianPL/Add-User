@@ -4,7 +4,10 @@ const btn = document.querySelector("button");
 const personsWrapper = document.querySelector(".result");
 const modal = document.querySelector(".modal-message");
 const modalBtn = document.querySelector(".modal-btn");
+const errorName = document.querySelector(".error-name");
+const errorDesc = document.querySelector(".error-desc");
 
+//hiding and displaying modal with a message
 const toggleModal = () => {
   modal.classList.toggle("toggle-modal");
 };
@@ -14,19 +17,23 @@ const validateInputs = () => {
     nameInput.value.trim().length === 0 &&
     description.value.trim().length === 0
   ) {
-    console.log("falsy name and description");
+    errorName.style.visibility = "visible";
+    errorDesc.style.visibility = "visible";
     return false;
   } else if (nameInput.value.trim().length === 0) {
-    console.log("falsy name");
+    errorName.style.visibility = "visible";
     return false;
   } else if (description.value.trim().length === 0) {
-    console.log("Falsy description");
+    errorDesc.style.visibility = "visible";
     return false;
   } else {
+    errorName.style.visibility = "hidden";
+    errorDesc.style.visibility = "hidden";
     return true;
   }
 };
 
+//creating person div - it is append to DOM
 const createUser = (name, description) => {
   const personDiv = document.createElement("div");
   personDiv.classList.add("person");
@@ -47,6 +54,8 @@ const createUser = (name, description) => {
 
 const handleFormSubmit = (e) => {
   e.preventDefault();
+  errorName.style.visibility = "hidden";
+  errorDesc.style.visibility = "hidden";
   if (validateInputs()) {
     createPostRequest(nameInput.value, description.value);
     createUser(nameInput.value, description.value);
@@ -58,6 +67,7 @@ const handleFormSubmit = (e) => {
   }
 };
 
+//displaying people from fetched array
 const showFetchedPeople = (array) => {
   array.map((obj) => {
     const { name, description } = obj;
@@ -88,6 +98,7 @@ const createPostRequest = (nameValue, descriptionValue) => {
 
 fetch("http://localhost:5000/api/v1/users")
   .then((res) => res.json())
+  //mapping through fetched array in a function
   .then((data) => showFetchedPeople(data));
 
 btn.addEventListener("click", handleFormSubmit);

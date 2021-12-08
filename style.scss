@@ -51,9 +51,15 @@ form {
     }
 
     input, textarea {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         border-radius: 5px;
         border: 2px solid rgb(182, 182, 182);
+    }
+
+    .error-name, .error-desc {
+        color: red;
+        margin-bottom: 25px;
+        visibility: hidden;
     }
 
     button {
